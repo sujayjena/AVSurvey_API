@@ -8,8 +8,8 @@ namespace AVSurvey.Application.Models
     public class LoginByMobileNumberRequestModel
     {
         [Required(ErrorMessage = ValidationConstants.MobileNumberRequied_Msg)]
-        [RegularExpression(ValidationConstants.MobileNumberRegExp, ErrorMessage = ValidationConstants.MobileNumberRegExp_Msg)]
-        [MaxLength(ValidationConstants.MobileNumber_MaxLength, ErrorMessage = ValidationConstants.MobileNumber_MaxLength_Msg)]
+        //[RegularExpression(ValidationConstants.MobileNumberRegExp, ErrorMessage = ValidationConstants.MobileNumberRegExp_Msg)]
+        //[MaxLength(ValidationConstants.MobileNumber_MaxLength, ErrorMessage = ValidationConstants.MobileNumber_MaxLength_Msg)]
         public string?MobileNumber { get; set; }
 
         [Required(ErrorMessage = "Password is required")]
@@ -27,8 +27,8 @@ namespace AVSurvey.Application.Models
     public class MobileAppLoginRequestModel
     {
         [Required(ErrorMessage = ValidationConstants.MobileNumberRequied_Msg)]
-        [RegularExpression(ValidationConstants.MobileNumberRegExp, ErrorMessage = ValidationConstants.MobileNumberRegExp_Msg)]
-        [MaxLength(ValidationConstants.MobileNumber_MaxLength, ErrorMessage = ValidationConstants.MobileNumber_MaxLength_Msg)]
+        //[RegularExpression(ValidationConstants.MobileNumberRegExp, ErrorMessage = ValidationConstants.MobileNumberRegExp_Msg)]
+        //[MaxLength(ValidationConstants.MobileNumber_MaxLength, ErrorMessage = ValidationConstants.MobileNumber_MaxLength_Msg)]
         public string?MobileNumber { get; set; }
 
         [Required(ErrorMessage = "Password is required")]
