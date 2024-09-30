@@ -53,7 +53,7 @@ namespace AVSurvey.API.Controllers
 
         [Route("[action]")]
         [HttpPost]
-        public async Task<ResponseModel> GetFeedbackQuestionList(BaseSearchEntity parameters)
+        public async Task<ResponseModel> GetFeedbackQuestionList(FeedbackQuestionSearch_Request parameters)
         {
             IEnumerable<FeedbackQuestion_Response> lstRoles = await _manageFeedbackRepository.GetFeedbackQuestionList(parameters);
             _response.Data = lstRoles.ToList();
@@ -73,6 +73,67 @@ namespace AVSurvey.API.Controllers
             {
                 var vResultObj = await _manageFeedbackRepository.GetFeedbackQuestionById(Id);
                 _response.Data = vResultObj;
+            }
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> FBQuestionActivate_Deactivate(FBQuestionActivate_Deactivate_Response parameters)
+        {
+            if (parameters.Id <= 0)
+            {
+                _response.Message = "Id is required";
+            }
+            else
+            {
+                int resultDailyTravelExpense = await _manageFeedbackRepository.FBQuestionActivate_Deactivate(parameters);
+
+                if (resultDailyTravelExpense == (int)SaveOperationEnums.NoRecordExists)
+                {
+                    _response.Message = "No record exists";
+                }
+                else if (resultDailyTravelExpense == (int)SaveOperationEnums.ReocrdExists)
+                {
+                    _response.Message = "Record already exists";
+                }
+                else if (resultDailyTravelExpense == (int)SaveOperationEnums.NoResult)
+                {
+                    _response.Message = "Something went wrong, please try again";
+                }
+                else
+                {
+                    _response.Message = "Record details saved sucessfully";
+                }
+            }
+            return _response;
+        }
+
+        #endregion
+
+        #region Feedback Question
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> SaveFeedbackQuestionAnswer(FeedbackQuestionAnswer_Request parameters)
+        {
+            int result = await _manageFeedbackRepository.SaveFeedbackQuestionAnswer(parameters);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record is already exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                _response.Message = "Record details saved sucessfully";
             }
             return _response;
         }

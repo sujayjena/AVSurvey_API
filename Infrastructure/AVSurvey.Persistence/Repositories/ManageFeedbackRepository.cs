@@ -39,9 +39,10 @@ namespace AVSurvey.Persistence.Repositories
             return await SaveByStoredProcedure<int>("SaveFeedbackQuestion", queryParameters);
         }
 
-        public async Task<IEnumerable<FeedbackQuestion_Response>> GetFeedbackQuestionList(BaseSearchEntity parameters)
+        public async Task<IEnumerable<FeedbackQuestion_Response>> GetFeedbackQuestionList(FeedbackQuestionSearch_Request parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@CategoryId", parameters.CategoryId);
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@PageNo", parameters.PageNo);
@@ -62,6 +63,33 @@ namespace AVSurvey.Persistence.Repositories
             return (await ListByStoredProcedure<FeedbackQuestion_Response>("GetFeedbackQuestionById", queryParameters)).FirstOrDefault();
         }
 
+        public async Task<int> FBQuestionActivate_Deactivate(FBQuestionActivate_Deactivate_Response parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@StatusId", parameters.StatusId);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("FBQuestionActivate_Deactivate", queryParameters);
+        }
+
+        #endregion
+
+        #region Feedback Question Answer
+        public async Task<int> SaveFeedbackQuestionAnswer(FeedbackQuestionAnswer_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@FBQuestionId", parameters.FBQuestionId);
+            queryParameters.Add("@RegistrationNo", parameters.RegistrationNo);
+            queryParameters.Add("@MobileNo", parameters.MobileNo);
+            queryParameters.Add("@FBQuestion_answer_json_format", parameters.FBQuestion_answer_json_format);
+            queryParameters.Add("@TimeTakenToFinish", parameters.TimeTakenToFinish);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SaveFeedbackQuestionAnswer", queryParameters);
+        }
         #endregion
     }
 }

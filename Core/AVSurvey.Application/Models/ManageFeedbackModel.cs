@@ -1,4 +1,5 @@
 ﻿using AVSurvey.Domain.Entities;
+using AVSurvey.Persistence.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,6 +38,11 @@ namespace AVSurvey.Application.Models
         public bool? IsActive { get; set; }
     }
 
+    public class FeedbackQuestionSearch_Request : BaseSearchEntity
+    {
+        public int? CategoryId { get; set; }
+    }
+
     public class FeedbackQuestion_Response : BaseResponseEntity
     {
         public int? CategoryId { get; set; }
@@ -50,6 +56,31 @@ namespace AVSurvey.Application.Models
         public string? StatusName { get; set; }
         public bool? IsPublished { get; set; }
         public bool? IsActive { get; set; }
+    }
+    public class FBQuestionActivate_Deactivate_Response
+    {
+        public int? Id { get; set; }
+        public int? StatusId { get; set; }
+    }
+
+    #endregion
+
+    #region Feedback Question Answer
+    public class FeedbackQuestionAnswer_Request : BaseEntity
+    {
+        public int? FBQuestionId { get; set; }
+
+        [DefaultValue("")]
+        public string? RegistrationNo { get; set; }
+
+        [DefaultValue("")]
+        public string? MobileNo { get; set; }
+
+        [DefaultValue("")]
+        public string? FBQuestion_answer_json_format { get; set; }
+
+        [DefaultValue("")]
+        public string? TimeTakenToFinish { get; set; }
     }
     #endregion
 }
