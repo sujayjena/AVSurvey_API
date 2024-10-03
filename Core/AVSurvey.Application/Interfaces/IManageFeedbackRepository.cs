@@ -26,6 +26,8 @@ namespace AVSurvey.Application.Interfaces
 
         Task<int> SaveFeedbackQuestionAnswer(FeedbackQuestionAnswer_Request parameters);
 
+        Task<IEnumerable<FeedbackQuestionAnswer_Response>> GetFeedbackQuestionAnswerList(FeedbackQuestionAnswerSearch_Request parameters);
+
         #endregion
     }
 }

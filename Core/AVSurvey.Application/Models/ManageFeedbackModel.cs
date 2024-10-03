@@ -82,5 +82,21 @@ namespace AVSurvey.Application.Models
         [DefaultValue("")]
         public string? TimeTakenToFinish { get; set; }
     }
+
+    public class FeedbackQuestionAnswerSearch_Request : BaseSearchEntity
+    {
+        public int? FBQuestionId { get; set; }
+    }
+
+    public class FeedbackQuestionAnswer_Response : BaseResponseEntity
+    {
+        public int? FBQuestionId { get; set; }
+        public string? FBQuestion_Title { get; set; }
+        public string? RegistrationNo { get; set; }
+        public string? MobileNo { get; set; }
+        public string? FBQuestion_answer_json_format { get; set; }
+        public string? TimeTakenToFinish { get; set; }
+    }
+
     #endregion
 }
