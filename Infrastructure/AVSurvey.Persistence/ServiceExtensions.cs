@@ -27,6 +27,7 @@ namespace AVSurvey.Persistence
             services.AddScoped<IRolePermissionRepository, RolePermissionRepository>();
             services.AddScoped<IAdminMasterRepository, AdminMasterRepository>();
             services.AddScoped<IManageFeedbackRepository, ManageFeedbackRepository>();
+            services.AddScoped<IDashboardRepository, DashboardRepository>();
         }
     }
 }

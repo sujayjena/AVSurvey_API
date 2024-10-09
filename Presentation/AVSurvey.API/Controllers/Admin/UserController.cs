@@ -85,6 +85,12 @@ namespace AVSurvey.API.Controllers.Admin
         public async Task<ResponseModel> GetUserList(BaseSearchEntity parameters)
         {
             IEnumerable<User_Response> lstUsers = await _userRepository.GetUserList(parameters);
+
+            foreach (var item in lstUsers)
+            {
+                var vUserCategoryObj = await _userRepository.GetUserCategoryByEmployeeId(item.Id, 0);
+                item.UserCategoryList = (vUserCategoryObj.ToList());
+            }
             _response.Data = lstUsers.ToList();
             _response.Total = parameters.Total;
             return _response;
