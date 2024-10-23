@@ -34,5 +34,14 @@ namespace AVSurvey.API.Controllers
             _response.Data = objList.ToList();
             return _response;
         }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetDashboard_SurveyNPSSummary(DashboardNPS_Search_Request parameters)
+        {
+            var objList = await _dashboardRepository.GetDashboard_SurveyNPSSummary(parameters);
+            _response.Data = objList.ToList();
+            return _response;
+        }
     }
 }

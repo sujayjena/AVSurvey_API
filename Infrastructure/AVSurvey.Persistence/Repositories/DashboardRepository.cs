@@ -31,5 +31,17 @@ namespace AVSurvey.Persistence.Repositories
 
             return result;
         }
+
+        public async Task<IEnumerable<Dashboard_SurveyNPSSummary_Response>> GetDashboard_SurveyNPSSummary(DashboardNPS_Search_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@FromDate", parameters.FromDate);
+            queryParameters.Add("@ToDate", parameters.ToDate);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<Dashboard_SurveyNPSSummary_Response>("GetDashboard_SurveyNPSSummary", queryParameters);
+
+            return result;
+        }
     }
 }

@@ -26,4 +26,17 @@ namespace AVSurvey.Application.Models
 
         public int? EmployeeId { get; set; }
     }
+
+    public class DashboardNPS_Search_Request
+    {
+        public DateTime? FromDate { get; set; }
+        public DateTime? ToDate { get; set; }
+    }
+
+    public class Dashboard_SurveyNPSSummary_Response
+    {
+        public string? QuestionName { get; set; }
+
+        public string? NPS { get; set; }
+    }
 }
