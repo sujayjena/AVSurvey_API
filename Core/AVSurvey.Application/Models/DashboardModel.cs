@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace AVSurvey.Application.Models
@@ -37,6 +38,8 @@ namespace AVSurvey.Application.Models
     {
         public string? QuestionName { get; set; }
 
+        [JsonIgnore]
+        public long? NPS_Without_Perct { get; set; }
         public string? NPS { get; set; }
     }
 }
