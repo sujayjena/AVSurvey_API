@@ -29,5 +29,12 @@ namespace AVSurvey.Application.Interfaces
         Task<IEnumerable<UserCategory_Response>> GetUserCategoryByEmployeeId(int EmployeeId, int CategoryId);
 
         #endregion
+
+        #region Branch Mapping
+
+        Task<int> SaveBranchMapping(BranchMapping_Request parameters);
+        Task<IEnumerable<BranchMapping_Response>> GetBranchMappingByEmployeeId(int EmployeeId, int BranchId);
+
+        #endregion
     }
 }

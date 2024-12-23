@@ -81,6 +81,9 @@ namespace AVSurvey.Application.Models
 
         [DefaultValue("")]
         public string? TimeTakenToFinish { get; set; }
+
+        [DefaultValue(0)]
+        public int? EmployeeId { get; set; }
     }
 
     public class FeedbackQuestionAnswerSearch_Request : BaseSearchEntity

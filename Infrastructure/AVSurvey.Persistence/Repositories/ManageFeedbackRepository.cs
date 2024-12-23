@@ -86,6 +86,7 @@ namespace AVSurvey.Persistence.Repositories
             queryParameters.Add("@MobileNo", parameters.MobileNo);
             queryParameters.Add("@FBQuestion_answer_json_format", parameters.FBQuestion_answer_json_format);
             queryParameters.Add("@TimeTakenToFinish", parameters.TimeTakenToFinish);
+            queryParameters.Add("@EmployeeId", parameters.EmployeeId);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
             return await SaveByStoredProcedure<int>("SaveFeedbackQuestionAnswer", queryParameters);

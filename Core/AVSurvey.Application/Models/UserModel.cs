@@ -1,4 +1,5 @@
 ﻿using AVSurvey.Domain.Entities;
+using AVSurvey.Persistence.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +19,7 @@ namespace AVSurvey.Application.Models
         public User_Request()
         {
             UserCategoryList = new List<UserCategory_Request>();
+            BranchList = new List<BranchMapping_Request>();
         }
 
         public string? UserName { get; set; }
@@ -46,6 +48,7 @@ namespace AVSurvey.Application.Models
         public bool? IsActive { get; set; }
 
         public List<UserCategory_Request>? UserCategoryList { get; set; }
+        public List<BranchMapping_Request>? BranchList { get; set; }
     }
 
     public class User_Response : BaseResponseEntity
@@ -53,6 +56,7 @@ namespace AVSurvey.Application.Models
         public User_Response()
         {
             UserCategoryList = new List<UserCategory_Response>();
+            BranchList = new List<BranchMapping_Response>();
         }
 
         public string? UserName { get; set; }
@@ -88,6 +92,7 @@ namespace AVSurvey.Application.Models
         public bool? IsActive { get; set; }
 
         public List<UserCategory_Response>? UserCategoryList { get; set; }
+        public List<BranchMapping_Response>? BranchList { get; set; }
     }
 
     public class UserListByRole_Search
@@ -136,5 +141,25 @@ namespace AVSurvey.Application.Models
         public int? UserId { get; set; }
         public int? CategoryId { get; set; }
         public string? CategoryName { get; set; }
+    }
+
+    public class BranchMapping_Request : BaseEntity
+    {
+        [JsonIgnore]
+        public string? Action { get; set; }
+        [JsonIgnore]
+        public int? UserId { get; set; }
+        public int? BranchId { get; set; }
+    }
+
+    public class BranchMapping_Response : BaseEntity
+    {
+        public int? UserId { get; set; }
+
+        [JsonIgnore]
+        public int? EmployeeId { get; set; }
+
+        public int? BranchId { get; set; }
+        public string? BranchName { get; set; }
     }
 }

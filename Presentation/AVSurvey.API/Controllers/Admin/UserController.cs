@@ -16,13 +16,16 @@ namespace AVSurvey.API.Controllers.Admin
     {
         private ResponseModel _response;
         private readonly IUserRepository _userRepository;
+        private readonly IAdminMasterRepository _adminMasterRepository;
 
-        public UserController(IUserRepository userRepository)
+        public UserController(IUserRepository userRepository, IAdminMasterRepository adminMasterRepository)
         {
             _userRepository = userRepository;
+            _adminMasterRepository = adminMasterRepository;
 
             _response = new ResponseModel();
             _response.IsSuccess = true;
+           
         }
 
         #region User 
@@ -49,9 +52,9 @@ namespace AVSurvey.API.Controllers.Admin
             {
                 _response.Message = "Record details saved sucessfully";
 
-                #region // Add/Update Branch Mapping
+                #region // Add/Update User Category
 
-                // Delete Old mapping of employee
+                // Delete Old User Category
 
                 var vUserCategoryDELETEObj = new UserCategory_Request()
                 {
@@ -62,7 +65,7 @@ namespace AVSurvey.API.Controllers.Admin
                 int resultUserCategoryDELETE = await _userRepository.SaveUserCategory(vUserCategoryDELETEObj);
 
 
-                // Add new mapping of employee
+                // Add new User Category
                 foreach (var vUserCategoryitem in parameters.UserCategoryList)
                 {
                     var vUserCategoryObj = new UserCategory_Request()
@@ -73,6 +76,34 @@ namespace AVSurvey.API.Controllers.Admin
                     };
 
                     int resultUserCategory = await _userRepository.SaveUserCategory(vUserCategoryObj);
+                }
+
+                #endregion
+
+                #region // Add/Update Branch Mapping
+
+                // Delete Old mapping of employee
+
+                var vBracnMapDELETEObj = new BranchMapping_Request()
+                {
+                    Action = "DELETE",
+                    UserId = result,
+                    BranchId = 0
+                };
+                int resultBranchMappingDELETE = await _userRepository.SaveBranchMapping(vBracnMapDELETEObj);
+
+
+                // Add new mapping of employee
+                foreach (var vBranchitem in parameters.BranchList)
+                {
+                    var vBracnMapObj = new BranchMapping_Request()
+                    {
+                        Action = "INSERT",
+                        UserId = result,
+                        BranchId = vBranchitem.BranchId
+                    };
+
+                    int resultBranchMapping = await _userRepository.SaveBranchMapping(vBracnMapObj);
                 }
 
                 #endregion
@@ -110,8 +141,8 @@ namespace AVSurvey.API.Controllers.Admin
 
                 if (vResultObj != null)
                 {
+                    //User Category
                     var vUserCategoryObj = await _userRepository.GetUserCategoryByEmployeeId(vResultObj.Id, 0);
-
                     foreach (var item in vUserCategoryObj)
                     {
                         var vCatResOnj = new UserCategory_Response()
@@ -123,6 +154,23 @@ namespace AVSurvey.API.Controllers.Admin
                         };
 
                         vResultObj.UserCategoryList.Add(vCatResOnj);
+                    }
+
+                    //Branch Mapping
+                    var vBranchMappingObj = await _userRepository.GetBranchMappingByEmployeeId(vResultObj.Id, 0);
+                    foreach (var item in vBranchMappingObj)
+                    {
+                        var vBranchObj = await _adminMasterRepository.GetBranchById(Convert.ToInt32(item.BranchId));
+                        var vBrMapResOnj = new BranchMapping_Response()
+                        {
+                            Id = item.Id,
+                            UserId = vResultObj.Id,
+                            EmployeeId = vResultObj.Id,
+                            BranchId = item.BranchId,
+                            BranchName = vBranchObj != null ? vBranchObj.BranchName : string.Empty,
+                        };
+
+                        vResultObj.BranchList.Add(vBrMapResOnj);
                     }
                 }
                 _response.Data = vResultObj;
