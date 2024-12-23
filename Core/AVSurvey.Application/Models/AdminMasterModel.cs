@@ -45,4 +45,47 @@ namespace AVSurvey.Application.Models
         public bool? IsActive { get; set; }
     }
     #endregion
+
+    #region Branch
+    public class Branch_Request : BaseEntity
+    {
+        [DefaultValue("")]
+        public string? BranchName { get; set; }
+
+        [DefaultValue("")]
+        public string? EmailId { get; set; }
+
+        [DefaultValue("")]
+        public string? MobileNo { get; set; }
+
+        [DefaultValue("")]
+        public string? Address { get; set; }
+
+        [DefaultValue("")]
+        public string? StateName { get; set; }
+
+        [DefaultValue("")]
+        public string? CityName { get; set; }
+
+        [DefaultValue("")]
+        public string? AreaName { get; set; }
+
+        [DefaultValue("")]
+        public string? Pincode { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class Branch_Response : BaseResponseEntity
+    {
+        public string? BranchName { get; set; }
+        public string? EmailId { get; set; }
+        public string? MobileNo { get; set; }
+        public string? Address { get; set; }
+        public string? StateName { get; set; }
+        public string? CityName { get; set; }
+        public string? AreaName { get; set; }
+        public string? Pincode { get; set; }
+        public bool? IsActive { get; set; }
+    }
+    #endregion
 }

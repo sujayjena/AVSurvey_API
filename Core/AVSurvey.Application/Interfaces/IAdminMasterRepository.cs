@@ -25,5 +25,13 @@ namespace AVSurvey.Application.Interfaces
 
         Task<Category_Response?> GetCategoryById(int Id);
         #endregion
+
+        #region Branch
+        Task<int> SaveBranch(Branch_Request parameters);
+
+        Task<IEnumerable<Branch_Response>> GetBranchList(BaseSearchEntity parameters);
+
+        Task<Branch_Response?> GetBranchById(int Id);
+        #endregion
     }
 }

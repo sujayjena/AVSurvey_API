@@ -93,5 +93,49 @@ namespace AVSurvey.Persistence.Repositories
         }
 
         #endregion
+
+        #region Branch
+        public async Task<int> SaveBranch(Branch_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@BranchName", parameters.BranchName.SanitizeValue());
+            queryParameters.Add("@EmailId", parameters.EmailId);
+            queryParameters.Add("@MobileNo", parameters.MobileNo);
+            queryParameters.Add("@Address", parameters.Address);
+            queryParameters.Add("@StateName", parameters.StateName);
+            queryParameters.Add("@CityName", parameters.CityName);
+            queryParameters.Add("@AreaName", parameters.AreaName);
+            queryParameters.Add("@Pincode", parameters.Pincode);
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SaveBranch", queryParameters);
+        }
+
+        public async Task<IEnumerable<Branch_Response>> GetBranchList(BaseSearchEntity parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<Branch_Response>("GetBranchList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
+
+        public async Task<Branch_Response?> GetBranchById(int Id)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", Id);
+            return (await ListByStoredProcedure<Branch_Response>("GetBranchById", queryParameters)).FirstOrDefault();
+        }
+
+        #endregion
     }
 }
