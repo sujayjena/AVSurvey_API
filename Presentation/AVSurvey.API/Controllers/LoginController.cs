@@ -81,6 +81,11 @@ namespace AVSurvey.API.Controllers
                         //var vUserNotificationList = await _notificationRepository.GetNotificationList(vNotification_SearchObj);
 
                         var vUserDetail = await _userRepository.GetUserById(Convert.ToInt32(loginResponse.UserId));
+                        var vUserBranchMappingDetail = await _userRepository.GetBranchMappingByEmployeeId(EmployeeId: Convert.ToInt32(loginResponse.UserId), BranchId: 0);
+                        if (vUserBranchMappingDetail.ToList().Count > 0)
+                        {
+                            strBrnachIdList = string.Join(",", vUserBranchMappingDetail.ToList().OrderBy(x => x.BranchId).Select(x => x.BranchId));
+                        }
 
                         employeeSessionData = new SessionDataEmployee
                         {
@@ -94,7 +99,8 @@ namespace AVSurvey.API.Controllers
                             IsWebUser = loginResponse.IsWebUser,
                             IsActive = loginResponse.IsActive,
                             Token = tokenResponse.Item1,
-                           
+                            BranchId = strBrnachIdList,
+
                             UserRoleList = vRoleList.ToList(),
                             //UserNotificationList = vUserNotificationList.ToList()
                         };

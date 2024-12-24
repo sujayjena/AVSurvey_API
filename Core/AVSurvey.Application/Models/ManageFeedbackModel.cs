@@ -89,6 +89,7 @@ namespace AVSurvey.Application.Models
     public class FeedbackQuestionAnswerSearch_Request : BaseSearchEntity
     {
         public int? FBQuestionId { get; set; }
+        public int? EmployeeId { get; set; }
     }
 
     public class FeedbackQuestionAnswer_Response : BaseResponseEntity

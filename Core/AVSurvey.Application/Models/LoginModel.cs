@@ -95,6 +95,7 @@ namespace AVSurvey.Application.Models
         public bool?IsMobileUser { get; set; }
         public bool?IsActive { get; set; }
         public string?Token { get; set; }
+        public string? BranchId { get; set; }
         public List<RoleMaster_Employee_Permission_Response> UserRoleList { get; set; }
     }
 }

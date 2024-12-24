@@ -32,6 +32,10 @@ namespace AVSurvey.Application.Models
     {
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
+        public int? EmployeeId { get; set; }
+
+        [DefaultValue("")]
+        public string? BranchId { get; set; }
     }
 
     public class Dashboard_SurveyNPSSummary_Response

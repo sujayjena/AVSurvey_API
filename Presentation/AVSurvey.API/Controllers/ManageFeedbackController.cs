@@ -144,16 +144,13 @@ namespace AVSurvey.API.Controllers
 
         [Route("[action]")]
         [HttpPost]
-        public async Task<ResponseModel> ExportFeedbackQuestionAnswerData(int FBQuestionId = 0)
+        public async Task<ResponseModel> ExportFeedbackQuestionAnswerData(FeedbackQuestionAnswerSearch_Request request)
         {
             _response.IsSuccess = false;
             byte[] result;
             int recordIndex = 1;
             ExcelWorksheet WorkSheet1;
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-
-            var request = new FeedbackQuestionAnswerSearch_Request();
-            request.FBQuestionId = FBQuestionId;
 
             IEnumerable<FeedbackQuestionAnswer_Response> lstObj = await _manageFeedbackRepository.GetFeedbackQuestionAnswerList(request);
 
