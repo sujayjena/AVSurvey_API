@@ -121,6 +121,13 @@ namespace AVSurvey.Application.Models
         public long? RegionId { get; set; }
     }
 
+    public class ReportingToEmpList_Response
+    {
+        public long Value { get; set; }
+        public string? Text { get; set; }
+        public string? BranchId { get; set; }
+    }
+
     public partial class EmployeesListByReportingTo_Response
     {
         public int? Id { get; set; }

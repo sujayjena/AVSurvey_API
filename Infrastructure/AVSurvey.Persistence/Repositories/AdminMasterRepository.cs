@@ -113,9 +113,10 @@ namespace AVSurvey.Persistence.Repositories
             return await SaveByStoredProcedure<int>("SaveBranch", queryParameters);
         }
 
-        public async Task<IEnumerable<Branch_Response>> GetBranchList(BaseSearchEntity parameters)
+        public async Task<IEnumerable<Branch_Response>> GetBranchList(Branch_Search parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@BranchId", parameters.BranchId);
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@PageNo", parameters.PageNo);

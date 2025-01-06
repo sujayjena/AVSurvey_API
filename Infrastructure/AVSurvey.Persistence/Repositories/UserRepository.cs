@@ -113,13 +113,13 @@ namespace AVSurvey.Persistence.Repositories
             return result;
         }
 
-        public async Task<IEnumerable<SelectList_Response>> GetReportingToEmployeeForSelectList(ReportingToEmpListParameters parameters)
+        public async Task<IEnumerable<ReportingToEmpList_Response>> GetReportingToEmployeeForSelectList(ReportingToEmpListParameters parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@RoleId", parameters.RoleId);
             queryParameters.Add("@RegionId", parameters.RegionId.SanitizeValue());
 
-            return await ListByStoredProcedure<SelectList_Response>("GetReportingToEmployeeForSelectList", queryParameters);
+            return await ListByStoredProcedure<ReportingToEmpList_Response>("GetReportingToEmployeeForSelectList", queryParameters);
         }
 
         public async Task<IEnumerable<EmployeesListByReportingTo_Response>> GetEmployeesListByReportingTo(int EmployeeId)

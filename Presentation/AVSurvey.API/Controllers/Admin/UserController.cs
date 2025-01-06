@@ -191,7 +191,7 @@ namespace AVSurvey.API.Controllers.Admin
         [HttpPost]
         public async Task<ResponseModel> GetReportingToEmpListForSelectList(ReportingToEmpListParameters parameters)
         {
-            IEnumerable<SelectList_Response> lstResponse = await _userRepository.GetReportingToEmployeeForSelectList(parameters);
+            IEnumerable<ReportingToEmpList_Response> lstResponse = await _userRepository.GetReportingToEmployeeForSelectList(parameters);
             _response.Data = lstResponse.ToList();
             return _response;
         }

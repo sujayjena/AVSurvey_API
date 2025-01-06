@@ -167,7 +167,7 @@ namespace AVSurvey.API.Controllers.Admin
 
         [Route("[action]")]
         [HttpPost]
-        public async Task<ResponseModel> GetBranchList(BaseSearchEntity parameters)
+        public async Task<ResponseModel> GetBranchList(Branch_Search parameters)
         {
             IEnumerable<Branch_Response> lstRoles = await _adminMasterRepository.GetBranchList(parameters);
             _response.Data = lstRoles.ToList();

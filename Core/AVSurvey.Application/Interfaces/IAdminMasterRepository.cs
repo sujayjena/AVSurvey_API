@@ -29,7 +29,7 @@ namespace AVSurvey.Application.Interfaces
         #region Branch
         Task<int> SaveBranch(Branch_Request parameters);
 
-        Task<IEnumerable<Branch_Response>> GetBranchList(BaseSearchEntity parameters);
+        Task<IEnumerable<Branch_Response>> GetBranchList(Branch_Search parameters);
 
         Task<Branch_Response?> GetBranchById(int Id);
         #endregion

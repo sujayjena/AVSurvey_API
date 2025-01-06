@@ -20,7 +20,7 @@ namespace AVSurvey.Application.Interfaces
 
         Task<IEnumerable<UserListByRole_Response>> GetUserLisByRoleIdOrRoleName(UserListByRole_Search parameters);
 
-        Task<IEnumerable<SelectList_Response>> GetReportingToEmployeeForSelectList(ReportingToEmpListParameters parameters);
+        Task<IEnumerable<ReportingToEmpList_Response>> GetReportingToEmployeeForSelectList(ReportingToEmpListParameters parameters);
 
         Task<IEnumerable<EmployeesListByReportingTo_Response>> GetEmployeesListByReportingTo(int EmployeeId);
 

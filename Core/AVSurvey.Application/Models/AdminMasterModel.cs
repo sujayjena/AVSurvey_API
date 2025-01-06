@@ -1,4 +1,5 @@
 ﻿using AVSurvey.Domain.Entities;
+using AVSurvey.Persistence.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -87,5 +88,12 @@ namespace AVSurvey.Application.Models
         public string? Pincode { get; set; }
         public bool? IsActive { get; set; }
     }
+
+    public class Branch_Search : BaseSearchEntity
+    {
+        [DefaultValue("")]
+        public string? BranchId { get; set; }
+    }
+        
     #endregion
 }
