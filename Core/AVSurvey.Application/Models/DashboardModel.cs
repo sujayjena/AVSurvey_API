@@ -26,6 +26,9 @@ namespace AVSurvey.Application.Models
         public string? FilterType { get; set; }
 
         public int? EmployeeId { get; set; }
+
+        [DefaultValue("")]
+        public string? BranchId { get; set; }
     }
 
     public class DashboardNPS_Search_Request
@@ -36,6 +39,8 @@ namespace AVSurvey.Application.Models
 
         [DefaultValue("")]
         public string? BranchId { get; set; }
+
+        public int? CategoryId { get; set; }
     }
 
     public class Dashboard_SurveyNPSSummary_Response

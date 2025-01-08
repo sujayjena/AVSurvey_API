@@ -25,6 +25,7 @@ namespace AVSurvey.Persistence.Repositories
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@FilterType", parameters.FilterType);
             queryParameters.Add("@EmployeeId", parameters.EmployeeId);
+            queryParameters.Add("@BranchId", parameters.BranchId);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
             var result = await ListByStoredProcedure<Dashboard_SurveySummary_Response>("GetDashboard_SurveySummary", queryParameters);
@@ -39,6 +40,7 @@ namespace AVSurvey.Persistence.Repositories
             queryParameters.Add("@ToDate", parameters.ToDate);
             queryParameters.Add("@EmployeeId", parameters.EmployeeId);
             queryParameters.Add("@BranchId", parameters.BranchId);
+            queryParameters.Add("@CategoryId", parameters.CategoryId);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
             var result = await ListByStoredProcedure<Dashboard_SurveyNPSSummary_Response>("GetDashboard_SurveyNPSSummary", queryParameters);
