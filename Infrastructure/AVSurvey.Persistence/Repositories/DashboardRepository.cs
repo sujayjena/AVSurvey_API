@@ -41,9 +41,11 @@ namespace AVSurvey.Persistence.Repositories
             queryParameters.Add("@EmployeeId", parameters.EmployeeId);
             queryParameters.Add("@BranchId", parameters.BranchId);
             queryParameters.Add("@CategoryId", parameters.CategoryId);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
             var result = await ListByStoredProcedure<Dashboard_SurveyNPSSummary_Response>("GetDashboard_SurveyNPSSummary", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
 
             return result;
         }

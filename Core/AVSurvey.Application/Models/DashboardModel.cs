@@ -41,6 +41,9 @@ namespace AVSurvey.Application.Models
         public string? BranchId { get; set; }
 
         public int? CategoryId { get; set; }
+
+        [JsonIgnore]
+        public int Total { get; set; }
     }
 
     public class Dashboard_SurveyNPSSummary_Response
