@@ -94,6 +94,48 @@ namespace AVSurvey.Application.Models
         [DefaultValue("")]
         public string? BranchId { get; set; }
     }
-        
+
+    #endregion
+
+    #region Version Details
+
+    public class VersionDetails_Search : BaseSearchEntity
+    {
+        [DefaultValue("")]
+        public string? PackageName { get; set; }
+
+        [DefaultValue("")]
+        public string? UpdateType { get; set; }
+    }
+
+    public class VersionDetails_Request : BaseEntity
+    {
+        public int? AppVersionNo { get; set; }
+
+        [DefaultValue("")]
+        public string? AppVersionName { get; set; }
+
+        [DefaultValue("")]
+        public string? UpdateMsg { get; set; }
+
+        [DefaultValue("")]
+        public string? PackageName { get; set; }
+
+        [DefaultValue("")]
+        public string? UpdateType { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class VersionDetails_Response : BaseResponseEntity
+    {
+        public long? AppVersionNo { get; set; }
+        public string? AppVersionName { get; set; }
+        public string? UpdateMsg { get; set; }
+        public string? PackageName { get; set; }
+        public string? UpdateType { get; set; }
+        public bool IsActive { get; set; }
+
+    }
+
     #endregion
 }
